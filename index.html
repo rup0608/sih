@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWAXIN Mini Prototype</title>
+    <style>
+        body { font-family: sans-serif; background: #2d81e5; color: #0f172a; padding: 20px; }
+        .box { background: #fdfeff; border-radius: 12px; padding: 20px; max-width: 400px; margin: auto; }
+        .card { background: #0f172a; color:white;padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #f87171; }
+        button { width: 100%; background: #38bdf8; color: #eeeeee; border: none; padding: 10px; font-weight: bold; border-radius: 5px; cursor: pointer; }
+        select, input { width: 100%; padding: 8px; margin-bottom: 12px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>AWAXIN</h2>
+    
+    <label>Age (Years):</label>
+    <input type="number" id="age" value="19">
+    <label>Gender:</label>
+    <select id="gender">
+        <option value="FEMALE">Female</option>
+        <option value="MALE">Male</option>
+        <option value="OTHER">Other</option>
+    </select>
+
+    <label>Lifestyle:</label>
+    <select id="lifestyle">
+        <option value="STUDENT">Dorm Student</option>
+        <option value="PET_OWNER">Pet Owner / Hiker</option>
+        <option value="NONE">Standard Baseline</option>
+    </select>
+
+    <label>Travel Itinerary:</label>
+    <select id="travel">
+        <option value="NONE">No Immediate Travel</option>
+        <option value="BRAZIL">Brazil / Amazon Zone</option>
+    </select>
+
+    <button onclick="checkShield()">Run Protection Scan</button>
+
+    <div id="results"></div>
+</div>
+
+<script>
+function checkShield() {
+    const age = parseInt(document.getElementById('age').value);
+    const life = document.getElementById('lifestyle').value;
+    const travel = document.getElementById('travel').value;
+    const out = document.getElementById('results');
+    
+    out.innerHTML = "<h3>Target Recommendations:</h3>";
+
+    // 1. Age Rule
+    if (gender === "FEMALE" && age >= 9 && age <= 14) {
+        out.innerHTML += createCard("HPV Vaccine (Gardasil-9)", "CRITICAL ADVISORY", "Direct government priority target window to provide 90%+ lifecycle protection against mutating cervical cancer strains.");
+    } else if (age >= 9 && age <= 26) {
+        out.innerHTML += createCard("HPV Vaccine ", "Prevents cancer mutations", "Adolescent and young adult immunity catch-up window to shield against long-term viral cancer mutations.");
+    }
+    // 2. Lifestyle Rule
+    if (life === "STUDENT" && age <= 23) {
+        out.innerHTML += createCard("Meningitis Booster", "Prevents rapid brain infections causing blindness.", "Mild fever.", "Difficulty breathing.");
+    }
+    if (life === "PET_OWNER") {
+        out.innerHTML += createCard("Rabies Pre-Exposure", "Protects against unexpected transmission from animals.", "Muscle ache.", "Extreme dizziness.");
+    }
+    // 3. Travel Rule
+    if (travel === "BRAZIL") {
+        out.innerHTML += createCard("Yellow Fever Shot", "Prevents severe tropical fever and liver infections", "Low body aches.", "Throat swelling.");
+    }
+}
+
+function createCard(name, why, short, urgent) {
+    return `
+        <div class="card">
+            <h4>${name}</h4>
+            <p><b>Why:</b> ${why}</p>
+           
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>
